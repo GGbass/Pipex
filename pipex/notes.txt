@@ -1,0 +1,44 @@
+Consejos de Gabo
+
+1.-  carpetas para dividir la libft e incluir GNL y printf en la misma .H para todos
+
+
+PIPEX
+To create a pipe system for the terminal, you can follow these steps, which are based on the information provided in the sources:
+
+1.- Understand the Basics of Pipes: Pipes in Linux and Unix-like operating systems are used to connect the output of one command to the input of another.
+This allows you to chain commands together, where the output of one command becomes the input of the next. This is particularly useful for filtering
+and processing data in a streamlined manner 13.
+
+2.- Syntax for Using Pipes: 
+The basic syntax for using pipes is command_1 | command_2 | command_3 | ... | command_N. This means the output of command_1 is passed as input to command_2, and so on.
+For example, to list all files and directories and then filter them to find a specific file, you could use ls | grep file.txt 3.
+
+
+3.- Creating a Simple Pipe Example: Suppose you want to list all files in a directory, filter them to find files with "page"
+in their name, and then count the number of such files. You could use the 
+following command: ls | grep "page" | wc -l. This command uses ls to list files, grep to filter for files with "page", and wc -l to 
+count the number of lines in the output, effectively counting the number of files found 1.
+
+4.- Using Named Pipes: Named pipes, also known as FIFOs (First In, First Out), allow data to be stored in a pipe with a name in the filesystem.
+This can be useful for inter-process communication. To create a named pipe, use the mkfifo command followed by the name of the pipe.
+For example, mkfifo my_pipe. You can then use this named pipe in your commands with redirection operators (< for input and > for output) 1.
+
+
+5.-Implementing Pipes in a Custom Shell: If you're interested in implementing pipes in a custom shell, you'll need to handle the creation of pipes using the pipe() function,
+fork new processes for each command, and manage the redirection of standard input and output between these processes.
+This involves copying file descriptors, closing unnecessary ones, and executing commands using execvp().
+For example, in child 1, you would close the read end of the pipe, copy the write end to stdout, and execute the first command. In child 2,
+you would do the opposite: close the write end, copy the read end to stdin, and execute the second command 2.
+
+
+6.- Handling Multiple Commands with Pipes: When chaining multiple commands together with pipes,
+it's important to manage the flow of data correctly. Each command in the chain should read from the previous command's
+output and write to the next command's input. This can be achieved by carefully managing file descriptors and ensuring that
+each command is executed in the correct order 2.
+
+Debugging and Testing: When creating a pipe system, it's crucial to test each part of the system individually before integrating them.
+This helps in identifying and fixing issues early in the development process. You can also use tools like strace to trace system calls and signals,
+which can be helpful for debugging 1.
+By following these steps and understanding the principles behind pipes, 
+you can create a powerful and flexible system for processing and filtering data in the terminal.
