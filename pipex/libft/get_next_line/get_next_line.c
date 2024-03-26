@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 14:28:12 by gongarci          #+#    #+#             */
-/*   Updated: 2023/11/23 17:42:53 by gongarci         ###   ########.fr       */
+/*   Created: 2024/01/03 19:12:59 by gongarci          #+#    #+#             */
+/*   Updated: 2024/03/21 21:30:59 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 int	reader(char **buffer, char **line, int fd)
 {
@@ -18,7 +20,7 @@ int	reader(char **buffer, char **line, int fd)
 	while (bytes > 0 && join_and_check(*buffer, line) == 0)
 	{
 		bytes = read(fd, *buffer, BUFFER_SIZE);
-		if (bytes == -1)
+		if (bytes < 0)
 		{
 			free_memory(buffer);
 			free_memory(line);
@@ -26,12 +28,8 @@ int	reader(char **buffer, char **line, int fd)
 		}
 		(*buffer)[bytes] = '\0';
 	}
-	if (!(*line) || !*buffer)
-	{
-		free_memory(buffer);
-		free_memory(line);
+	if (!(*line))
 		return (-1);
-	}
 	return (bytes);
 }
 
@@ -40,15 +38,15 @@ int	join_and_check(char *buffer, char **line)
 	int		i;
 
 	i = 0;
-	while (buffer[i] != '\n' && buffer[i] != '\0')
+	while (buffer[i] != '\n' && i < ft_strlen(buffer) && buffer[i] != '\0')
 		i++;
 	if (buffer[i] == '\n')
 		i++;
-	(*line) = ft_strjoin(*line, buffer, i);
+	(*line) = ft_gnlstrjoin(*line, buffer, i);
 	if (! (*line))
 		return (-1);
-	ft_memcpy(buffer, buffer + i, ft_strlen(buffer) - i + 1);
-	i = ft_strlen(*line);
+	ft_gnlmemcpy(buffer, buffer + i, ft_gnlstrlen(buffer) - i + 1);
+	i = ft_gnlstrlen(*line);
 	if (i > 0 && (*line)[i - 1] == '\n')
 		return (1);
 	return (0);
@@ -57,7 +55,7 @@ int	join_and_check(char *buffer, char **line)
 int	allocate_memory(char **buffer, char **line)
 {
 	(*line) = malloc(sizeof(char));
-	if (!(*line))
+	if (!*line)
 	{
 		if (*buffer)
 			free_memory(buffer);
@@ -90,22 +88,22 @@ char	*free_memory(char **p)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[1024];
 	char		*line;
 	int			bytes;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
 	{
-		free_memory(&buffer);
+		free_memory(&buffer[fd]);
 		return (NULL);
 	}
-	if (allocate_memory(&buffer, &line) == 0)
+	if (allocate_memory(&buffer[fd], &line) == 0)
 		return (NULL);
-	bytes = reader(&buffer, &line, fd);
+	bytes = reader(&buffer[fd], &line, fd);
 	if (bytes == -1)
 		return (NULL);
 	else if (bytes == 0)
-		free_memory(&buffer);
+		free_memory(&buffer[fd]);
 	if (line[0] == '\0')
 	{
 		free_memory (&line);

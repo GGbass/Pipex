@@ -6,7 +6,7 @@
 #    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 20:20:21 by gongarci          #+#    #+#              #
-#    Updated: 2024/03/12 21:52:00 by gongarci         ###   ########.fr        #
+#    Updated: 2024/03/15 20:15:32 by gongarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C libft
 	gcc -Wall -Werror -Wextra -L libft -lft $(OBJ) -o pipex
-
 clean:
 	@make fclean -C libft
 	rm -f $(NAME)

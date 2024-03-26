@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 14:34:09 by gongarci          #+#    #+#             */
-/*   Updated: 2023/11/23 17:45:55 by gongarci         ###   ########.fr       */
+/*   Created: 2024/01/03 19:09:50 by gongarci          #+#    #+#             */
+/*   Updated: 2024/03/15 19:08:11 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_gnlmemset(void *b, int c, size_t len)
 {
 	char	*p;
 
@@ -25,7 +25,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-int	ft_strlen(const char *str)
+int	ft_gnlstrlen(const char *str)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t bytes)
+void	*ft_gnlmemcpy(void *dest, const void *src, size_t bytes)
 {
 	char	*p_dest;
 	char	*p_src;
@@ -46,8 +46,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t bytes)
 	i = 0;
 	p_dest = (char *)dest;
 	p_src = (char *)src;
-	if (!p_dest || !p_src)
-		return (NULL);
 	while (i < bytes)
 	{
 		p_dest[i] = p_src[i];
@@ -56,7 +54,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t bytes)
 	return (dest);
 }
 
-/*char	*ft_strdup(const char *str)
+/*char	*ft_gnlstrdup(const char *str)
 {
 	char	*point;
 	size_t	len;
@@ -69,13 +67,13 @@ void	*ft_memcpy(void *dest, const void *src, size_t bytes)
 	return (point);
 }*/
 
-char	*ft_strjoin(char *s1, char *s2, int len2)
+char	*ft_gnlstrjoin(char *s1, char *s2, int len2)
 {
 	char	*substr;
 	int		len1;
 	int		sub_len;
 
-	len1 = ft_strlen(s1);
+	len1 = ft_gnlstrlen(s1);
 	if (!s1 || !s2)
 		return (NULL);
 	sub_len = (len1 + len2 + 1);
@@ -84,8 +82,8 @@ char	*ft_strjoin(char *s1, char *s2, int len2)
 		return (NULL);
 	else
 	{
-		ft_memcpy(substr, s1, len1);
-		ft_memcpy(substr + len1, s2, len2);
+		ft_gnlmemcpy(substr, s1, len1);
+		ft_gnlmemcpy(substr + len1, s2, len2);
 		substr[sub_len -1] = '\0';
 	}
 	free(s1);
