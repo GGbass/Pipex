@@ -1,6 +1,6 @@
 Consejos de Gabo
 
-1.-  carpetas para dividir la libft e incluir GNL y printf en la misma .H para todos
+1.- carpetas para dividir la libft e incluir GNL y printf en la misma .H para todos
 
 
 PIPEX

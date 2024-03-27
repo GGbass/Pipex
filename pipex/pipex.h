@@ -6,13 +6,13 @@
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:39:21 by gongarci          #+#    #+#             */
-/*   Updated: 2024/03/25 19:11:28 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:26:22 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-
-
+#ifndef PIPEX_H
+# define PIPEX_H
+# include "./libft/libft.h"
 
 /* Estructura de datos input & output fds
 path  tomado por **env */
@@ -29,3 +29,6 @@ typedef struct s_pipex
 /* Creates a set of fds and forks to pass the output to a new command */
 int	pipex(int *fd);
 
+/*  Find the path of a command in the environment*/
+char	*find_path(char *cmd, char **env);
+#endif
