@@ -6,7 +6,7 @@
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:39:21 by gongarci          #+#    #+#             */
-/*   Updated: 2024/03/27 20:26:22 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:29:28 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ typedef struct s_pipex
 int	pipex(int *fd);
 
 /*  Find the path of a command in the environment*/
-char	*find_path(char *cmd, char **env);
+char	**find_path(char *cmd, char **env);
 #endif

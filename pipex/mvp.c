@@ -6,7 +6,7 @@
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 23:03:23 by gongarci          #+#    #+#             */
-/*   Updated: 2024/03/27 20:40:34 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:40:19 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int	main(int argc, char **argv, char **env)
 		close(fd[0]); // Close the read end of the pipe
 		execve(cmd[1], &cmd[1], env); // Execute the second command
 	}
+	fork (); // Create a new process
 	return (0);
 }

@@ -6,8 +6,8 @@
 #    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/27 19:27:07 by gongarci          #+#    #+#              #
-#    Updated: 2024/03/27 20:39:57 by gongarci         ###   ########.fr        #
+#    Updated: 2024/04/01 16:13:23 by gongarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-Este es un archivo de prueba en la linea 13
+Este es un archivo de prueba con 13 lineas.

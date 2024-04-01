@@ -42,3 +42,7 @@ This helps in identifying and fixing issues early in the development process. Yo
 which can be helpful for debugging 1.
 By following these steps and understanding the principles behind pipes, 
 you can create a powerful and flexible system for processing and filtering data in the terminal.
+
+
+int access(const char *pathname, int mode);
+fork -> pid_t	 fork(void) __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
