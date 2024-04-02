@@ -6,7 +6,7 @@
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:20:43 by gongarci          #+#    #+#             */
-/*   Updated: 2024/04/01 18:29:32 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:04:19 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@ int	main(int argc, char **argv, char **env)
 	int		i;
 	char	command1[100];
 	char	command2[100];
-	char	**pathcheck;
+	char	*pathcheck;
 
 	pathcheck = find_path(argv[1], env);
+	printf("good Path: %s\n", pathcheck);
+	pathcheck = find_path(argv[2], env);
+	printf("good Path: %s\n", pathcheck);
 	//printf("Path: %s\n", pathcheck);
-	while (pathcheck[i] != NULL)
+/* 	while (pathcheck[i] != NULL)
 	{
 		printf("Path: %s\n", pathcheck[i]);
 		i++;
-	}
+	} */
 	i = 0;
 	if (argc != 5)
 		return (printf("Wrong number of arguments\n"), 1);

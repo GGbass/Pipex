@@ -1,52 +1,44 @@
-<mxfile host="app.diagrams.net" modified="2024-04-01T17:12:18.115Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="WR9SYJjDRJSWQ16mb33f" version="24.2.1" type="device">
+<mxfile host="app.diagrams.net" modified="2024-04-02T18:01:21.115Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="4S0UvJbpFNIVQ3rPd-dO" version="24.2.1" type="device">
   <diagram name="Page-1" id="J9_rM3LESXh7NZFxzHAQ">
     <mxGraphModel dx="1004" dy="2094" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="lGCmDoUiIEBklHLovCdl-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="LDpIClf5S1GTpXZ0fK_w-1" target="LDpIClf5S1GTpXZ0fK_w-2">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="LDpIClf5S1GTpXZ0fK_w-1" target="lGCmDoUiIEBklHLovCdl-3">
+        <mxCell id="t171KHaTc2CPlj2R7wT8-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="LDpIClf5S1GTpXZ0fK_w-1" target="lGCmDoUiIEBklHLovCdl-7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="LDpIClf5S1GTpXZ0fK_w-1" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;int&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;pipex(int *fd) recive el array de fd&lt;/font&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;el cual crea dos procesos para gestionar las salida y entrada de los mismo&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;al hacer el llamado de pipe creamos dos procesos&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;uno de ellos sera el hijo = 0&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;el otro sera el resultado de pipe = 1&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;donde un error es -1&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;tanto como el padre y el hijo pueden gestionar los archivos de entrada y salida por la funcion DUP&lt;/font&gt;2&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=center;" parent="1" vertex="1">
-          <mxGeometry x="260" y="-390" width="360" height="290" as="geometry" />
-        </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="LDpIClf5S1GTpXZ0fK_w-2" target="lGCmDoUiIEBklHLovCdl-5">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry x="190" y="-540" width="360" height="290" as="geometry" />
         </mxCell>
         <mxCell id="LDpIClf5S1GTpXZ0fK_w-2" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;proceso del hijo&amp;nbsp; pipe = 0&lt;/font&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;cerramos el fd de entrada del pipe&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="100" y="310" width="340" height="230" as="geometry" />
+          <mxGeometry x="285" y="580" width="340" height="230" as="geometry" />
         </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-3" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;int dup2(int fd, int (0 or 1))&lt;/font&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;creamos una copia de cada fd descriptor&amp;nbsp;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="680" y="60" width="220" height="170" as="geometry" />
+        <mxCell id="lGCmDoUiIEBklHLovCdl-3" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;int dup2(int fd, int (0 or 1))&lt;/font&gt;&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;creamos una copia de cada fd descriptor&amp;nbsp;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="345" y="860" width="220" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="lGCmDoUiIEBklHLovCdl-5" target="lGCmDoUiIEBklHLovCdl-7">
+        <mxCell id="lGCmDoUiIEBklHLovCdl-5" value="int proceso del padre = 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="365" y="1140" width="180" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="t171KHaTc2CPlj2R7wT8-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="lGCmDoUiIEBklHLovCdl-7" target="lGCmDoUiIEBklHLovCdl-9">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-5" value="int proceso del padre = 1" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="600" y="550" width="180" height="170" as="geometry" />
+        <mxCell id="lGCmDoUiIEBklHLovCdl-7" value="FORK:&lt;div&gt;fork crea un proceso nuevo , exactamente igual al que llama a fork pero con&amp;nbsp; su propio espacio y su PID&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;tiene dos returns, el proceso padre y el proceso hijo&lt;/div&gt;&lt;div&gt;donde hijo e = 0&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="220" y="-190" width="310" height="230" as="geometry" />
         </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="lGCmDoUiIEBklHLovCdl-7" target="lGCmDoUiIEBklHLovCdl-9">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="630" y="865" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="lGCmDoUiIEBklHLovCdl-7" target="lGCmDoUiIEBklHLovCdl-12">
+        <mxCell id="t171KHaTc2CPlj2R7wT8-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="lGCmDoUiIEBklHLovCdl-9" target="lGCmDoUiIEBklHLovCdl-12">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-7" value="FORK" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="80" y="750" width="310" height="230" as="geometry" />
+        <mxCell id="lGCmDoUiIEBklHLovCdl-9" value="EXECVE&lt;div&gt;filename , command, ruta&lt;/div&gt;&lt;div&gt;devolvemos -1 si ocurre un error, exeve se utiliza para reemplazar el proceso actual con un nuevo proceso&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="560" y="-40" width="220" height="265" as="geometry" />
         </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="lGCmDoUiIEBklHLovCdl-9" target="lGCmDoUiIEBklHLovCdl-12">
+        <mxCell id="t171KHaTc2CPlj2R7wT8-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="lGCmDoUiIEBklHLovCdl-12" target="LDpIClf5S1GTpXZ0fK_w-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-9" value="EXECVE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="580" y="732.5" width="220" height="265" as="geometry" />
+        <mxCell id="lGCmDoUiIEBklHLovCdl-12" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://assets-global.website-files.com/5d0dc87aac109e1ffdbe379c/613703a693062c71baec8698_whats-the-difference-between-fork-and-exec-function-in-c.jpg;" parent="1" vertex="1">
+          <mxGeometry x="190" y="320" width="530" height="162.6" as="geometry" />
         </mxCell>
-        <mxCell id="lGCmDoUiIEBklHLovCdl-12" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://assets-global.website-files.com/5d0dc87aac109e1ffdbe379c/613703a693062c71baec8698_whats-the-difference-between-fork-and-exec-function-in-c.jpg;" vertex="1" parent="1">
-          <mxGeometry x="190" y="1080" width="530" height="162.6" as="geometry" />
+        <mxCell id="t171KHaTc2CPlj2R7wT8-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.377;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="lGCmDoUiIEBklHLovCdl-7" target="lGCmDoUiIEBklHLovCdl-12">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

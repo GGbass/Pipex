@@ -6,13 +6,13 @@
 #    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 20:20:21 by gongarci          #+#    #+#              #
-#    Updated: 2024/03/27 20:31:30 by gongarci         ###   ########.fr        #
+#    Updated: 2024/04/02 21:07:39 by gongarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SRC = 	main.c \
+SRC = 	mvp.c \
 		path.c \
 
 
