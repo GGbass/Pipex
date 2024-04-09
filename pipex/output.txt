@@ -1,0 +1,4 @@
+cmd[1]: cat
+path; ELF
+Error executing command
+
