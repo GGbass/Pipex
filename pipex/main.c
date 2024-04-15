@@ -6,38 +6,28 @@
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:20:43 by gongarci          #+#    #+#             */
-/*   Updated: 2024/04/02 21:04:19 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/04/15 21:20:26 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/* programa 'infile' "comando 1" "comando 2" 'outfile' */
 int	main(int argc, char **argv, char **env)
 {
-	int		i;
-	char	command1[100];
-	char	command2[100];
-	char	*pathcheck;
-
-	pathcheck = find_path(argv[1], env);
-	printf("good Path: %s\n", pathcheck);
-	pathcheck = find_path(argv[2], env);
-	printf("good Path: %s\n", pathcheck);
-	//printf("Path: %s\n", pathcheck);
-/* 	while (pathcheck[i] != NULL)
-	{
-		printf("Path: %s\n", pathcheck[i]);
-		i++;
-	} */
-	i = 0;
-	if (argc != 5)
-		return (printf("Wrong number of arguments\n"), 1);
-	printf ("Numero de argumentos %d\n", argc);
-	printf("infile: '%s'\n command1'%s'\n command2'%s'\n outfile'%s'\n", argv[1], argv[2], argv[3], argv[4]);
-/* 	while (env[i] != NULL)
-	{
-		printf (" Entorno  %s\n", env[i]);
-		i++;
-	} */
+	char	*cmd[2];
+	int		fd[2];
+	
+	if (argc !=  5)
+		ft_error("Error: Invalid number of arguments\n", 1);
+	cmd[0] = argv[2];
+	cmd[1] = argv[3];
+	if ((fd[0] = (open(argv[1], O_RDONLY))) == -1)
+		perror("Error opening infile\n");
+	//fd[0] = open(argv[1], O_RDONLY);
+	if ((fd[1] = open(argv[4], O_CREAT | O_WRONLY| O_TRUNC, 0644)) == -1)// TRUNCATE can be specified the number permissions like 777 - 0644
+		perror("Error opening outfile\n");
+	if ((pipex(fd, env, cmd) == -1))
+		perror("Error in pipex\n");
 	return (0);
 }

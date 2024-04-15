@@ -3,18 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 20:20:21 by gongarci          #+#    #+#              #
-#    Updated: 2024/04/07 00:46:43 by marvin           ###   ########.fr        #
+#    Updated: 2024/04/15 16:43:22 by gongarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SRC = 	mvp.c \
+SRC = 	main.c \
 		path.c \
 		ft_error.c \
+		ft_pipex.c \
 
 
 OBJ = $(SRC:.c=.o)

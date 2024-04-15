@@ -14,6 +14,6 @@
 
 void	ft_error(char *message, int status)
 {
-	printf("%s\n", message);
+	printf("%s and exit with %i\n", message, status);
 	exit(status);
 }
