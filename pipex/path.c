@@ -6,7 +6,7 @@
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:15 by gongarci          #+#    #+#             */
-/*   Updated: 2024/04/15 21:10:00 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:47:43 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,23 @@ char	*find_path(char *cmd, char **envp)
 	/* ft_error("ERROR: Finding command", 127); */
 	perror("Error in find_path\n");
 	exit(127);
+}
+char	*get_flag(char *cmd)
+{
+	char	**lst;
+	char	*flag;
+	int		i;
+	
+	i = 0;
+	lst = ft_split(cmd, ' ');
+	while (lst[i])
+	{
+		if (ft_strncmp(lst[i], "-", 1) == 0)
+		{
+			flag = ft_strdup(lst[i]);
+			return (flag);
+		}
+		i++;
+	}
+	return (NULL);
 }

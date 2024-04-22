@@ -6,7 +6,7 @@
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:50:05 by gongarci          #+#    #+#             */
-/*   Updated: 2024/04/16 22:13:35 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:22:59 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 static void	ft_child(int *fd, int *pipe_fd, char **env, char **cmd)
 {
-	char	**flags;
-	char	*path;
+	char	*flags;
+	char	**full_command;
+	char	*command;
 	int		status;
+	
 
 	dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[0]);
 	dup2(fd[0], STDIN_FILENO);
-	flags = ft_split(cmd[0], ' ');
-/* 	while(p_cmd != '0')
-	{
-		printf(" in child p_cmd = %s\n", p_cmd[0]);
-		p_cmd++;
-	} */
-	path = find_path(cmd[0], env);
+	//printf("cmd[0] = %s\n", cmd[0]);
+	full_command = ft_split(cmd[0], ' ');
+	flags = get_flag(cmd[0]);
+	command = find_path(cmd[0], env);
 /* 	if ((execve(path, p_cmd, env)) == -1)
 		ft_error("error in execve in child \n", 128); */
-	if ((execve(path, flags, NULL)) == -1)
+	if ((execve(command, full_command, env)) == -1)
 	{
 		perror("Error in execve in child\n");
 		exit(127);
@@ -39,26 +38,23 @@ static void	ft_child(int *fd, int *pipe_fd, char **env, char **cmd)
 
 static void	ft_parent(int *fd, int *pipe_fd, char **env, char **cmd)
 {
-	char	**flags;
-	char	*path1;
+	char	*flags;
+	char	*command2;
+	char	**full_command;
 	int		status;
 
 	dup2(pipe_fd[0], STDIN_FILENO);
 	close(pipe_fd[1]);
 	dup2(fd[1], STDOUT_FILENO);
-	flags = ft_split(cmd[1], ' ');
-/* 	while(p_cmd1 != NULL)
-	{
-		printf(" in parent p_cmd1 = %s\n", p_cmd1[0]);
-		p_cmd1++;
-	} */
-	path1 = find_path(cmd[1], env);
+	full_command = ft_split(cmd[1], ' ');
+	flags = get_flag(cmd[1]);
+	command2 = find_path(cmd[1], env);
 	/* if ((execve(path1, p_cmd1, env)) == -1)
 		ft_error("error in execve in parent \n", 128); */
-	if ((execve(path1, flags, NULL)) == -1)
+	if ((execve(command2, full_command, env)) == -1)
 	{
 		perror("Error in execve in parent\n");
-		exit(127);
+		exit(128);
 	}
 }
 
@@ -85,6 +81,6 @@ int	pipex(int *fd, char **env, char **cmd)
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	waitpid(child, &status, 0); //wait for standard input on termminal to write it on the pipe outfile
-	waitpid(parent, &status, 0);
+	//waitpid(parent, &status, 0);
 	return (status);
 }
