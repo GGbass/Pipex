@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:50:05 by gongarci          #+#    #+#             */
-/*   Updated: 2024/04/22 14:22:59 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:45:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,19 @@ static void	ft_child(int *fd, int *pipe_fd, char **env, char **cmd)
 	dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[0]);
 	dup2(fd[0], STDIN_FILENO);
-	//printf("cmd[0] = %s\n", cmd[0]);
+	fprintf(fd[1], "cmd[0] = %s\n", cmd[0]);
 	full_command = ft_split(cmd[0], ' ');
 	flags = get_flag(cmd[0]);
-	command = find_path(cmd[0], env);
+	command = find_path(full_command[0], env);
 /* 	if ((execve(path, p_cmd, env)) == -1)
 		ft_error("error in execve in child \n", 128); */
-	if ((execve(command, full_command, env)) == -1)
+	
+	printf("command  in child %s\n", command);
+	printf("flags in child %s\n", flags);
+	if (execve(command, full_command, NULL) == -1)
 	{
-		perror("Error in execve in child\n");
-		exit(127);
+		ft_error("Error in execve in child\n", 127);
+		//exit(127);
 	}
 }
 
@@ -48,13 +51,12 @@ static void	ft_parent(int *fd, int *pipe_fd, char **env, char **cmd)
 	dup2(fd[1], STDOUT_FILENO);
 	full_command = ft_split(cmd[1], ' ');
 	flags = get_flag(cmd[1]);
-	command2 = find_path(cmd[1], env);
+	command2 = find_path(full_command[0], env);
 	/* if ((execve(path1, p_cmd1, env)) == -1)
 		ft_error("error in execve in parent \n", 128); */
-	if ((execve(command2, full_command, env)) == -1)
+	if ((execve(command2, full_command, NULL)) == -1)
 	{
-		perror("Error in execve in parent\n");
-		exit(128);
+		ft_error("Error in execve in parent\n", 128);
 	}
 }
 

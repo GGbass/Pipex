@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:07:15 by gongarci          #+#    #+#             */
-/*   Updated: 2024/04/22 11:47:43 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:32:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ char	*find_path(char *cmd, char **envp)
 			return (goodpath);
 		j++;
 	}
-	/* ft_error("ERROR: Finding command", 127); */
-	perror("Error in find_path\n");
-	exit(127);
+	
+	ft_error("ERROR: Finding command", 127);
+	/* perror("Error in find_path\n");
+	exit(127); */
 }
 char	*get_flag(char *cmd)
 {
