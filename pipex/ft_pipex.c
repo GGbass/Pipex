@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:50:05 by gongarci          #+#    #+#             */
-/*   Updated: 2024/04/22 17:45:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/04/25 22:31:34 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,19 @@ static void	ft_child(int *fd, int *pipe_fd, char **env, char **cmd)
 	char	*command;
 	int		status;
 	
-
 	dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[0]);
 	dup2(fd[0], STDIN_FILENO);
-	fprintf(fd[1], "cmd[0] = %s\n", cmd[0]);
 	full_command = ft_split(cmd[0], ' ');
 	flags = get_flag(cmd[0]);
 	command = find_path(full_command[0], env);
-/* 	if ((execve(path, p_cmd, env)) == -1)
-		ft_error("error in execve in child \n", 128); */
-	
 	printf("command  in child %s\n", command);
 	printf("flags in child %s\n", flags);
 	if (execve(command, full_command, NULL) == -1)
 	{
-		ft_error("Error in execve in child\n", 127);
-		//exit(127);
+		perror("Error in execve in child\n");
+		exit(127);
+		//ft_error("Error in execve in child\n", 127);
 	}
 }
 
@@ -52,11 +48,11 @@ static void	ft_parent(int *fd, int *pipe_fd, char **env, char **cmd)
 	full_command = ft_split(cmd[1], ' ');
 	flags = get_flag(cmd[1]);
 	command2 = find_path(full_command[0], env);
-	/* if ((execve(path1, p_cmd1, env)) == -1)
-		ft_error("error in execve in parent \n", 128); */
 	if ((execve(command2, full_command, NULL)) == -1)
 	{
-		ft_error("Error in execve in parent\n", 128);
+		perror("Error in execve in child\n");
+		exit(127);
+		//ft_error("Error in execve in parent\n", 127);
 	}
 }
 
@@ -68,21 +64,21 @@ int	pipex(int *fd, char **env, char **cmd)
 	int		status;
 	
 	if ((pipe(pipe_fd)) < 0)
-		return (perror("Error creating pipe\n"), -1);
-		//ft_error("Error creating pipe\n", 1);
+		ft_error("Error creating pipe\n", 124);
 	if ((child = fork()) < 0)
-		return (perror("Error creating process child\n"), -1);
-		//ft_error("Error creating process\n", 2);
+		ft_error("Error creating process\n", 123);
 	if (child == 0)
 		ft_child(fd, pipe_fd, env, cmd);
 	if ((parent = fork()) < 0)
-		return(perror("Error creating parent process\n"), -1);
-		//ft_error("Error creating a parent process", 127);
+		ft_error("Error creating a parent process", 122);
 	if (parent == 0)
 		ft_parent(fd, pipe_fd, env, cmd);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
-	waitpid(child, &status, 0); //wait for standard input on termminal to write it on the pipe outfile
+	status = waitpid(child, &status, 0); //wait for standard input on termminal to write it on the pipe outfile
 	//waitpid(parent, &status, 0);
+	printf("%i\n", status);
+	printf("Child %i\n", child);
+	printf("Parent %i\n", parent);
 	return (status);
 }
