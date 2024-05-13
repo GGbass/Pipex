@@ -3,29 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 20:20:21 by gongarci          #+#    #+#              #
-#    Updated: 2024/05/06 17:33:49 by marvin           ###   ########.fr        #
+#    Updated: 2024/05/13 20:10:04 by gongarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SRC = 	main.c \
-		path.c \
-		ft_error.c \
-		ft_pipex.c \
-
+SRC = 	ft_pipex_bonus.c \
+		main_bonus.c \
 
 OBJ = $(SRC:.c=.o)
+
+CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
+	print($(GREEN) done)
 	#gcc -Wall -Werror -Wextra -L libft -lft $(OBJ) -o pipex
-	gcc -Wall	-Werror -Wextra $(OBJ) -L libft -lft -o pipex
+	gcc $(CFLAGS) $(OBJ) -L libft -lft -o pipex
 clean:
 	@make fclean -C libft
 	rm -f $(NAME)

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex.c                                         :+:      :+:    :+:   */
+/*   ft_pipex_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:50:05 by gongarci          #+#    #+#             */
-/*   Updated: 2024/05/13 20:14:18 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:14:50 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	ft_error(char *message, int status)
 {
@@ -40,7 +40,7 @@ char	*find_path(char *cmd, char **envp)
 			return (goodpath);
 		j++;
 	}
-	return (ft_error("Error command not found\n", 127), NULL);
+	return (ft_error("Error command not found\n", 127),NULL);
 }
 
 static void	ft_child(int *fd, int *pipe_fd, char **env, char **cmd)

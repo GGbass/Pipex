@@ -60,7 +60,7 @@ BONUS = ft_lstnew.c \
 
 OBJS = $(FILES:.c=.o)
 COMPILER = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 OBJS_BONUS = $(BONUS:.c=.o)
 NAME = libft.a

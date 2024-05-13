@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:20:43 by gongarci          #+#    #+#             */
-/*   Updated: 2024/05/13 20:10:30 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:10:47 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*cmd[2];
+	char	**cmd;
 	int		fd[2];
 	int		status;
+	int		i;
+	char	*line;
 
-	if (argc != 5)
+	i = 0;
+	line = NULL;
+	if (argc < 5)
 		ft_error("Error: Invalid number of arguments\n", 127);
-	cmd[0] = argv[2];
-	cmd[1] = argv[3];
+	cmd = malloc(sizeof(char *) * (argc -3));
+	while (i < (argc -3))
+	{
+		cmd[i] = argv[i + 2];
+		i++;
+	}
 	fd[0] = open(argv[1], O_RDONLY);
-	fd[1] = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
+	{
+		line = get_next_line(0);
+	}
+	fd[1] = open(argv[argc -1], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	status = pipex(fd, env, cmd);
 	if (status < 0)
 		ft_error("Error in pipex\n", status);
