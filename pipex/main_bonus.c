@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:20:43 by gongarci          #+#    #+#             */
-/*   Updated: 2024/05/14 16:58:13 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/05/18 22:40:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ int	main(int argc, char **argv, char **env)
 		i++;
 	}
 	fd[0] = open(argv[1], O_RDONLY);
-/* 	if (ft_strncmp(argv[1], "here_doc", ft_strlen(argv[1])) == 0)
-	{
-		line = get_next_line(0);
-	} */
-	printf("output file: %s\n", argv[argc -1]);
 	fd[1] = open(argv[argc -1], O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	status = pipex(fd, env, cmd);
 	if (status < 0)

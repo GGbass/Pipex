@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 12:40:01 by gongarci          #+#    #+#             */
-/*   Updated: 2024/05/14 19:21:19 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/05/14 22:58:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		ft_tolower(int i);
 int		ft_isprint(int i);
 /*<string.h>*/
 int		ft_strlen(const char *str);
+int	ft_len(char **array);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 void	*ft_memset(void *s, int c, size_t n);
