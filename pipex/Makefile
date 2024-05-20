@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 20:20:21 by gongarci          #+#    #+#              #
-#    Updated: 2024/05/14 15:49:44 by gongarci         ###   ########.fr        #
+#    Updated: 2024/05/19 23:55:53 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,10 @@ NAMEB = bonus
 SRC = 	ft_pipex.c \
 		main.c \
 
-SRCB =	ft_pipex_bonus.c \
-		here_doc.c \
+SRCB =	here_doc.c \
+		ft_pipex_bonus.c \
 		main_bonus.c \
+		##mvp.c \
 		
 OBJ = $(SRC:.c=.o)
 OBJB = $(SRCB:.c=.o)

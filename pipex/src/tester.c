@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:01:15 by gongarci          #+#    #+#             */
-/*   Updated: 2024/05/18 22:00:52 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/19 21:43:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int	main(int argc, char argv)
+/* int	main(int argc, char argv)
 {
 	int		fd[2];
 	int		i;
@@ -39,4 +39,26 @@ int	main(int argc, char argv)
 	close (fd[1]);
 	printf ("En la terminal\n");
 	return (0);
-}
+} */
+
+/* int	main(void)
+{
+	int	y[2];
+	int	*x;
+	int	i;
+
+	i = 0;
+	while (i < 2)
+	{
+		y[i] = i + 1;
+		printf("%d\n", y[i]);
+		i++;
+	}
+	x = y;
+	printf("%d\n", x[0]);
+	printf("%d\n", x[1]);
+	y[1] = 3;
+	printf("%d %d\n", y[1], x[1]);
+	return (0);
+} */
+
