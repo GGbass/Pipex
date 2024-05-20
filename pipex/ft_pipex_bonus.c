@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:50:05 by gongarci          #+#    #+#             */
-/*   Updated: 2024/05/20 01:05:51 by marvin           ###   ########.fr       */
+/*   Updated: 2024/05/20 17:51:15 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,23 +108,50 @@ int	pipex(int *fd, char **env, char **cmd)
 	close(pipe_fd[1]);
 	return (WEXITSTATUS(status));
 } */
-
 static void	ft_child(int *fd, int *pipe_fd, char **env, char *cmd)
 {
 	char	**full_command;
 	char	*command;
 
 	printf("in child command %s\n", cmd);
-	close(pipe_fd[0]);
-/* 	if (cmd && dup2(pipe_fd[1], STDOUT_FILENO) < 0)
-		ft_error("Error duplicating file descriptor\n", 127); */
+	//close(pipe_fd[0]);
 	dup2(pipe_fd[1], STDOUT_FILENO);
-	/* if (!cmd && dup2(fd[1], STDOUT_FILENO) < 0)
-		ft_error("Error duplicating file descriptor\n", 127); */
-	close(fd[0]);
-	close(fd[1]);
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
 	if (fd[0] == -1)
 		exit(0);
+	full_command = ft_split(cmd, ' ');
+	command = find_path(full_command[0], env);
+	if (execve(command, full_command, env) == -1)
+		ft_error("Error in child execve\n", 127);
+}
+
+static void	ft_child2(int *fd, int *pipe_fd, char **env, char *cmd)
+{
+	char	**full_command;
+	char	*command;
+
+	printf("in child2 command %s\n", cmd);
+	dup2(pipe_fd[0], STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	full_command = ft_split(cmd, ' ');
+	command = find_path(full_command[0], env);
+	if (execve(command, full_command, env) == -1)
+		ft_error("Error in child execve\n", 127);
+}
+
+static void	ft_child3(int *pipe_fd, char **env, char *cmd)
+{
+	char	**full_command;
+	char	*command;
+	
+	printf("in child3 command %s\n", cmd);
+	dup2(pipe_fd[0], STDIN_FILENO);
+	dup2(pipe_fd[1], STDOUT_FILENO);
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
 	full_command = ft_split(cmd, ' ');
 	command = find_path(full_command[0], env);
 	if (execve(command, full_command, env) == -1)
@@ -152,13 +179,19 @@ int	pipex(int *fd, char **env, char **cmd)
 		if (child < 0)
 			ft_error("Error creating process\n", 125);
 		if (child == 0)
-			ft_child(fd, pipe_fd, env, cmd[i]);
-		close(pipe_fd[1]);
-		if (cmd[i] && dup2(pipe_fd[0], STDIN_FILENO) < 0)
-			ft_error("Error duplicating file descriptor\n", 127);
+		{
+			if (i == 0)
+				ft_child(fd, pipe_fd, env, cmd[i]);
+			else if (i < (ft_len(cmd) - 1))
+				ft_child3(pipe_fd, env, cmd[i]);
+			else
+				ft_child2(fd, pipe_fd, env, cmd[i]);
+		}
 		waitpid(child, &status, 0);
+		close(pipe_fd[1]);
 		close(pipe_fd[0]);
 		i++;
 	}
+
 	return (WEXITSTATUS(status));
 }

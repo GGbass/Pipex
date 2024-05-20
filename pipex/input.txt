@@ -3,11 +3,27 @@
 #                                                         :::      ::::::::    #
 #    input.txt                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/27 19:27:07 by gongarci          #+#    #+#              #
-#    Updated: 2024/05/06 22:00:02 by marvin           ###   ########.fr        #
+#    Updated: 2024/05/20 15:09:07 by gongarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 Este es un archivo de prueba con 13 lineas.
+
+dup2[0] infile >  entrada a la escritura del archivo
+
+Si es el primer comando
+dup2[pipe_[1]] STDOUT_FILENO  redirijir la salida a la entrada del pipe
+
+entrada archvo , salida al pipe
+
+
+comandos de pormedio 2 || cuando tenemos un tercero
+
+entrada del pipe , salida del pipe
+
+segundo comando 3
+
+entrada del pipe , salida al archivo
