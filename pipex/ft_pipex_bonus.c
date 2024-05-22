@@ -6,7 +6,7 @@
 /*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:50:05 by gongarci          #+#    #+#             */
-/*   Updated: 2024/05/20 17:51:15 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/05/22 22:48:20 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ static void	ft_child(int *fd, int *pipe_fd, char **env, char *cmd)
 	dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[0]);
 	close(pipe_fd[1]);
+	close(fd[0]);
+	close(fd[1]);
+	
 	if (fd[0] == -1)
 		exit(0);
 	full_command = ft_split(cmd, ' ');
@@ -126,28 +129,12 @@ static void	ft_child(int *fd, int *pipe_fd, char **env, char *cmd)
 		ft_error("Error in child execve\n", 127);
 }
 
-static void	ft_child2(int *fd, int *pipe_fd, char **env, char *cmd)
-{
-	char	**full_command;
-	char	*command;
-
-	printf("in child2 command %s\n", cmd);
-	dup2(pipe_fd[0], STDIN_FILENO);
-	dup2(fd[1], STDOUT_FILENO);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	full_command = ft_split(cmd, ' ');
-	command = find_path(full_command[0], env);
-	if (execve(command, full_command, env) == -1)
-		ft_error("Error in child execve\n", 127);
-}
-
-static void	ft_child3(int *pipe_fd, char **env, char *cmd)
+static void	ft_child2(int *pipe_fd, char **env, char *cmd)
 {
 	char	**full_command;
 	char	*command;
 	
-	printf("in child3 command %s\n", cmd);
+	printf("in child2 command %s\n", cmd);
 	dup2(pipe_fd[0], STDIN_FILENO);
 	dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[0]);
@@ -157,15 +144,39 @@ static void	ft_child3(int *pipe_fd, char **env, char *cmd)
 	if (execve(command, full_command, env) == -1)
 		ft_error("Error in child execve\n", 127);
 }
+static void	ft_child3(int *fd, int *pipe_fd, char **env, char *cmd)
+{
+	char	**full_command;
+	char	*command;
+
+	printf("in child3 command %s\n", cmd);
+	dup2(pipe_fd[0], STDIN_FILENO);
+	close(pipe_fd[1]);
+	if (pipe_fd[0] > 0)
+		close(pipe_fd[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	//close(pipe_fd[0]);
+	close(fd[0]);
+	close(fd[1]);
+	full_command = ft_split(cmd, ' ');
+	command = find_path(full_command[0], env);
+	if (execve(command, full_command, env) == -1)
+		ft_error("Error in child execve\n", 127);
+}
+
 
 int	pipex(int *fd, char **env, char **cmd)
 {
 	int		pipe_fd[2];
+	int		*prev_pipe;
 	int		status;
-	pid_t	child;
+	int		child;
 	int		i;
-	
+
 	i = 0;
+	prev_pipe = malloc(sizeof(int) * 2);
+	if (!prev_pipe)
+		ft_error("Error allocating memory\n", 127);
 	if (dup2(fd[0], STDIN_FILENO) < 0)
 		ft_error("Error duplicating file descriptor\n", 127);
 	close(fd[0]);
@@ -175,6 +186,11 @@ int	pipex(int *fd, char **env, char **cmd)
 			ft_error("Error creating pipe\n", 126);
 		printf("pipe_fd[0]: %d\n", pipe_fd[0]);
 		printf("pipe_fd[1]: %d\n", pipe_fd[1]);
+		if (prev_pipe[0] > 0 && prev_pipe[1] > 0)
+		{
+			pipe_fd[0] = prev_pipe[0];
+			pipe_fd[1] = prev_pipe[1];
+		}
 		child = fork();
 		if (child < 0)
 			ft_error("Error creating process\n", 125);
@@ -183,15 +199,22 @@ int	pipex(int *fd, char **env, char **cmd)
 			if (i == 0)
 				ft_child(fd, pipe_fd, env, cmd[i]);
 			else if (i < (ft_len(cmd) - 1))
-				ft_child3(pipe_fd, env, cmd[i]);
+				ft_child2(pipe_fd, env, cmd[i]);
 			else
-				ft_child2(fd, pipe_fd, env, cmd[i]);
+				ft_child3(fd, prev_pipe, env, cmd[i]);
 		}
 		waitpid(child, &status, 0);
+		//wait(&child);
+		if (pipe_fd[0] > 0 && pipe_fd[1] > 0)
+		{
+			printf("Equals pipes\n");
+			prev_pipe = pipe_fd;
+		}
 		close(pipe_fd[1]);
 		close(pipe_fd[0]);
+		printf("prev_pipe[0]: %d\n", prev_pipe[0]);
+		printf("prev_pipe[1]: %d\n", prev_pipe[1]);
 		i++;
 	}
-
 	return (WEXITSTATUS(status));
 }
