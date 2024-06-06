@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 20:20:21 by gongarci          #+#    #+#              #
-#    Updated: 2024/05/19 23:55:53 by marvin           ###   ########.fr        #
+#    Updated: 2024/06/06 01:38:27 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@ NAMEB = bonus
 SRC = 	ft_pipex.c \
 		main.c \
 
-SRCB =	here_doc.c \
-		ft_pipex_bonus.c \
+SRCB =	ft_pipex_bonus.c \
+		get_path.c \
 		main_bonus.c \
-		##mvp.c \
+		##here_doc.c \
 		
 OBJ = $(SRC:.c=.o)
 OBJB = $(SRCB:.c=.o)
