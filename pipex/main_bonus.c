@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:20:43 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/10 10:27:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:55:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	main(int argc, char **argv, char **env)
 	i = ft_commands(vals.check, &vals, argc, argv);
 	if (vals.check == 0)
 		fd[0] = open(argv[1], O_RDONLY);
-	fd[1] = open(argv[argc -1], O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	if (vals.check == 0)
+		fd[1] = open(argv[argc -1], O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	fd[1] = open(argv[argc -1], O_CREAT | O_WRONLY | O_APPEND, 0666);
 	status = pipex(fd, &vals, i);
 	if (status < 0)
 		ft_error("Error in pipex\n", status);

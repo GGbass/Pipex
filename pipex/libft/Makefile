@@ -46,10 +46,27 @@ FILES = ft_strchr.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
+		ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c \
 		get_next_line_utils.c \
 		get_next_line.c \
+		./printf/ft_putnbr.c \
+		./printf/ft_printf.c \
+		./printf/ft_putchar.c \
+		./printf/ft_puthexa.c \
+		./printf/ft_putmem.c \
+		./printf/ft_string.c \
+		./printf/ft_unprintf.c \
+		./printf/ft_unsigned_int.c \
 
-BONUS = ft_lstnew.c \
+#BONUS = ft_lstnew.c \
 		ft_lstadd_front.c \
 		ft_lstsize.c \
 		ft_lstlast.c \
@@ -64,7 +81,7 @@ OBJS = $(FILES:.c=.o)
 COMPILER = gcc
 CFLAGS = -Wall -Wextra -Werror 
 
-OBJS_BONUS = $(BONUS:.c=.o)
+#OBJS_BONUS = $(BONUS:.c=.o)
 NAME = libft.a
 
 all: $(NAME)
@@ -72,16 +89,17 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-bonus: $(OBJS_BONUS)
-	ar rc $(NAME) $(OBJS_BONUS)
+#bonus: $(OBJS_BONUS)
+#	ar rc $(NAME) $(OBJS_BONUS)
 
 clean:
 	rm -f $(OBJS)
-	rm -f $(OBJS_BONUS)
+#	rm -f $(OBJS_BONUS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: clean fclean re all bonus
+.PHONY: clean fclean re all 
+#bonus

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:50:05 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/10 10:19:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:16:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	execute_child(t_pipex *data, int *fd, int cmd_len, t_values *vals)
 		close(data->pipe_fd[READ]);
 		while (vals->doc[i] != NULL)
 		{
-			printf ("%s\n", vals->doc[i]);
+			ft_printf ("%s\n", vals->doc[i]);
 			i++;
 		}
 		exit(0);

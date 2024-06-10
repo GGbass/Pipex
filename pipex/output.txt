@@ -1,6 +1,0 @@
-ft_pipex.c
-ft_pipex.o
-ft_pipex_bonus.c
-pipex
-pipex.h
-pipex_bonus.h

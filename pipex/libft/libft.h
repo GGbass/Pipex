@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 12:40:01 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/08 00:40:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/10 17:08:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdarg.h>
+# include <math.h>
+# include <limits.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
@@ -86,4 +89,14 @@ int		join_and_check(char *buffer, char **line);
 int		reader(char **buffer, char **line, int fd);
 char	*free_memory(char **p);
 char	*ft_gnlstrjoin(char *s1, char *s2, int len2);
+// printf
+int		ft_printf(char const *str, ...);
+void	ft_putchar(char c, int *len);
+void	ft_string(char *args, int *len);
+void	ft_putnbr(int number, int *len);
+void	ft_unsigned_int(unsigned int number, int *len);
+void	ft_puthexa(unsigned int number, char c, int *len);
+void	ft_putmem(unsigned long long n, int *len);
+int		ft_unprintf(int aux, int *len);
+
 #endif
