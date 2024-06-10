@@ -12,9 +12,20 @@
 
 #include "pipex_bonus.h"
 
-void	ft_error(char *message, int status)
+void	ft_error(char *message, int status, t_pipex *pipex)
 {
+	int	i;
+
+	i = 0;
 	perror(message);
+	while (i < pipex->i)
+	{
+		close(pipex->pipe_fd[i]);
+		close(pipex->pre_pipe[i]);
+		i++;
+	}
+	free(pipex->pipe_fd);
+	free(pipex->pre_pipe);
 	exit(status);
 }
 

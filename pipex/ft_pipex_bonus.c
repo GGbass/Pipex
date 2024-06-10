@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 18:50:05 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/10 17:16:41 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/10 20:21:34 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_child(int *fd, int *pipe_fd, char **env, char *cmd)
 	char	*command;
 
 	if (dup2(fd[READ], STDIN_FILENO) < 0)
-		ft_error("Error duplicating file descriptor\n", 127);
+		ft_error("Error duplicating file descriptor\n", 127, NULL);
 	close(fd[0]);
 	close(pipe_fd[READ]);
 	dup2(pipe_fd[WRITE], STDOUT_FILENO);
@@ -27,7 +27,7 @@ static void	ft_child(int *fd, int *pipe_fd, char **env, char *cmd)
 	full_command = ft_split(cmd, ' ');
 	command = find_path(full_command[0], env);
 	if (execve(command, full_command, env) == -1)
-		ft_error("Error in child execve\n", 127);
+		ft_error("Error in child execve\n", 127, NULL);
 }
 
 static void	ft_child2(int *pipe_fd, int *prev_pipe, char **env, char *cmd)
@@ -44,7 +44,7 @@ static void	ft_child2(int *pipe_fd, int *prev_pipe, char **env, char *cmd)
 	full_command = ft_split(cmd, ' ');
 	command = find_path(full_command[0], env);
 	if (execve(command, full_command, env) == -1)
-		ft_error("Error in child execve\n", 127);
+		ft_error("Error in child execve\n", 127, NULL);
 }
 
 static void	ft_child3(int *fd, int *pipe_fd, char **env, char *cmd)
@@ -60,7 +60,7 @@ static void	ft_child3(int *fd, int *pipe_fd, char **env, char *cmd)
 	full_command = ft_split(cmd, ' ');
 	command = find_path(full_command[0], env);
 	if (execve(command, full_command, env) == -1)
-		ft_error("Error in child execve\n", 127);
+		ft_error("Error in child execve\n", 127, NULL);
 }
 
 static void	execute_child(t_pipex *data, int *fd, int cmd_len, t_values *vals)
@@ -81,11 +81,22 @@ static void	execute_child(t_pipex *data, int *fd, int cmd_len, t_values *vals)
 		exit(0);
 	}
 	else if (data->i == 0)
+	{
+		close(data->pipe_fd[READ]);
 		ft_child(fd, data->pipe_fd, vals->env, vals->cmd[data->i]);
+	}
 	else if (data->i < cmd_len - 1)
+	{
+		close(data->pipe_fd[READ]);
+		close(data->pre_pipe[WRITE]);
 		ft_child2(data->pipe_fd, data->pre_pipe, vals->env, vals->cmd[data->i]);
+	}
 	else
+	{
+		close(data->pipe_fd[READ]);
+		//close(data->pre_pipe[WRITE]);
 		ft_child3(fd, data->pre_pipe, vals->env, vals->cmd[data->i]);
+	}
 }
 
 int	pipex(int *fd, t_values *vals, int cmd_len)
@@ -95,20 +106,22 @@ int	pipex(int *fd, t_values *vals, int cmd_len)
 	data.i = 0;
 	data.pipe_fd = ft_calloc(2, sizeof(int));
 	data.pre_pipe = ft_calloc(2, sizeof(int));
+	if (!data.pipe_fd || !data.pre_pipe)
+		ft_error("Error allocating memory\n", 126, &data);
 	while (vals->cmd[data.i] != NULL && data.i < cmd_len)
 	{
 		if (data.i == 0 || data.i < cmd_len - 1)
 			if (pipe(data.pipe_fd) == -1)
-				ft_error("Error creating pipe\n", 126);
+				ft_error("Error creating pipe\n", 126, &data);
 		data.pid = fork();
 		if (data.pid < 0)
-			ft_error("Error creating process\n", 125);
+			ft_error("Error creating process\n", 125, &data);
 		if (data.pid == 0)
 			execute_child(&data, fd, cmd_len, vals);
 		if (data.pipe_fd[READ] > 0 && data.pipe_fd[WRITE] > 0)
 			ft_int_memcpy(data.pre_pipe, data.pipe_fd, 2);
 		close(data.pipe_fd[WRITE]);
-		waitpid(data.pid, &data.status, 0);
+		//waitpid(data.pid, &data.status, 0);
 		data.i++;
 	}
 	ft_cleanup(&data);

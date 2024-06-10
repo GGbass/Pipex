@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:31 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/09 23:08:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/10 19:49:45 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@ char	**get_here_doc(char *limiter)
 
 	line = get_next_line(0);
 	doc = malloc(sizeof(char *) * 1);
+	if (!doc)
+		ft_error("Error allocating memory\n", 127, NULL);
 	*doc = ft_strdup("");
-	while (line && ft_strncmp(line, limiter, ft_strlen(limiter)))
+	while (line)
 	{
+		if ((ft_strlen(line) - 1) == ft_strlen(limiter))
+		{
+			if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+				break ;
+		}
 		*doc = ft_strjoin(*doc, line);
 		*doc = ft_strjoin(*doc, "\n");
 		free(line);

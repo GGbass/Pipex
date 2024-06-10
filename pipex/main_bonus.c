@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:20:43 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/10 17:55:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/10 19:10:31 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv, char **env)
 
 	vals.env = env;
 	if (argc < 5 || (checker(argv[1]) == 1 && argc < 6))
-		ft_error("Error: Invalid number of arguments\n", 127);
+		ft_error("Error: Invalid number of arguments\n", 127, NULL);
 	vals.check = checker(argv[1]);
 	i = ft_commands(vals.check, &vals, argc, argv);
 	if (vals.check == 0)
@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **env)
 	fd[1] = open(argv[argc -1], O_CREAT | O_WRONLY | O_APPEND, 0666);
 	status = pipex(fd, &vals, i);
 	if (status < 0)
-		ft_error("Error in pipex\n", status);
+		ft_error("Error in pipex\n", status, NULL);
 	close(fd[0]);
 	close(fd[1]);
 	return (status);

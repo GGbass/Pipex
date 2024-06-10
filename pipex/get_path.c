@@ -34,5 +34,6 @@ char	*find_path(char *cmd, char **envp)
 			return (goodpath);
 		j++;
 	}
-	return (ft_error("Error command not found\n", 127), NULL);
+	ft_error("Error command not found\n", 127, NULL);
+	return (NULL);
 }

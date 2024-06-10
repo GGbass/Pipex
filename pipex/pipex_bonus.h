@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:39:21 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/10 01:57:10 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/10 19:07:45 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_pipex
 	int		*pre_pipe;
 	int		i;
 	int		status;
-}t_pipex;
+}	t_pipex;
 
 /* Creates a set of fds and forks to pass the output to a new command */
 /* int		pipex(int *fd, char **env, char **cmd, int cmd_len); */
@@ -43,7 +43,7 @@ int		pipex(int *fd, t_values *vals, int cmd_len);
 /*  Find the path of a command in the environment*/
 char	*find_path(char *cmd, char **env);
 
-void	ft_error(char *message, int status);
+void	ft_error(char *message, int status, t_pipex *pipex);
 
 char	**get_here_doc(char *limiter);
 
