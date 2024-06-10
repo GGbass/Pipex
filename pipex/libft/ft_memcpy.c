@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 12:06:43 by gongarci          #+#    #+#             */
-/*   Updated: 2023/10/20 12:24:53 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/06/09 23:07:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*#include <string.h>*/
-/*#include <stdio.h>*/
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
@@ -20,13 +18,34 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char	*p_src;
 	size_t	i;
 
+	i = 0;
 	if (!dest && !src)
 	{
 		return (NULL);
 	}
-	i = 0;
 	p_dest = (char *)dest;
 	p_src = (char *)src;
+	while (i < n)
+	{
+		p_dest[i] = p_src[i];
+		i++;
+	}
+	return (dest);
+}
+
+void	*ft_int_memcpy(void *dest, const void *src, size_t n)
+{
+	int		*p_dest;
+	int		*p_src;
+	size_t	i;
+
+	i = 0;
+	if (!dest && !src)
+	{
+		return (NULL);
+	}
+	p_dest = (int *)dest;
+	p_src = (int *)src;
 	while (i < n)
 	{
 		p_dest[i] = p_src[i];

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:31 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/05 20:47:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/09 23:08:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,3 @@ char	**get_here_doc(char *limiter)
 	free(line);
 	return (doc);
 }
-
-/* char **get_doc_array(char *limiter, char *doc)
-{
-	char	**doc_array;
-	int		i;
-
-	i = 0;
-	doc_array = ft_split(doc, '\n');
-	while (doc_array[i] && ft_strncmp(doc_array[i], limiter, ft_strlen(limiter)))
-		i++;
-	doc_array[i] = NULL;
-	return (doc_array);
-}
- */

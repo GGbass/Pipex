@@ -12,12 +12,6 @@
 
 #include "pipex_bonus.h"
 
-void	ft_error(char *message, int status)
-{
-	perror(message);
-	exit(status);
-}
-
 char	*find_path(char *cmd, char **envp)
 {
 	char	**paths;

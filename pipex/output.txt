@@ -1,3 +1,6 @@
-#    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
-#    Created: 2024/03/27 19:27:07 by gongarci          #+#    #+#              #
-#    Updated: 2024/05/20 15:09:07 by gongarci         ###   ########.fr        #
+ft_pipex.c
+ft_pipex.o
+ft_pipex_bonus.c
+pipex
+pipex.h
+pipex_bonus.h
