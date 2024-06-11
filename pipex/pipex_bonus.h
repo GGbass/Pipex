@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:39:21 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/10 19:07:45 by gongarci         ###   ########.fr       */
+/*   Updated: 2024/06/10 23:45:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ char	**get_here_doc(char *limiter);
 int		checker(char *argv);
 
 void	ft_cleanup(t_pipex *pipex);
+
+void ft_fd(t_pipex *pipex);
 
 #endif

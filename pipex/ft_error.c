@@ -29,6 +29,14 @@ void	ft_error(char *message, int status, t_pipex *pipex)
 	exit(status);
 }
 
+void ft_fd(t_pipex *pipex)
+{
+	printf("pipex->pipe_fd[0] = %d\n", pipex->pipe_fd[0]);
+	printf("pipex->pipe_fd[1] = %d\n", pipex->pipe_fd[1]);
+	printf("pipex->pre_pipe[0] = %d\n", pipex->pre_pipe[0]);
+	printf("pipex->pre_pipe[1] = %d\n", pipex->pre_pipe[1]);
+}
+
 void	ft_cleanup(t_pipex *pipex)
 {
 	int	i;
@@ -36,7 +44,7 @@ void	ft_cleanup(t_pipex *pipex)
 	i = 0;
 	while (i < pipex->i)
 	{
-		close(pipex->pipe_fd[i]);
+		//close(pipex->pipe_fd[i]);
 		close(pipex->pre_pipe[i]);
 		i++;
 	}
