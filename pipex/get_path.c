@@ -26,6 +26,8 @@ char	*find_path(char *cmd, char **envp)
 	if (ft_strlen(cmd) <= 1 || !cmd)
 	{
 		ft_putstr_fd(command, 2);
+		free(command);
+		free(cmd);
 		return (ft_error2(": command not found\n", 127), NULL);
 	}
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
@@ -41,9 +43,11 @@ char	*find_path(char *cmd, char **envp)
 		i++;
 	}
 	ft_putstr_fd(command, 2);
+	free(goodpath);
+	free(command);
+	free(cmd);
 	return (ft_error2(": command not found\n", 127), NULL);
 }
-
 
 /* char	*find_path(char *cmd, char **envp)
 {

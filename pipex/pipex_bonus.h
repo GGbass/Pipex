@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:39:21 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/19 23:57:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/20 20:42:35 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 # include "./libft/libft.h"
-# include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/types.h>
 
@@ -55,7 +54,7 @@ char	**get_here_doc(char *limiter);
 
 int		checker(char *argv);
 
-void	ft_cleanup(t_pipex *pipex);
+void	ft_cleanup(t_pipex *data, t_values *vals);
 
 void ft_fd(t_pipex *pipex);
 

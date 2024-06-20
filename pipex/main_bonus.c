@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:20:43 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/20 19:11:38 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/20 19:21:58 by gongarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	ft_commands(int checker, t_values *vals, int argc, char **argv)
 	while (i < (argc -3 - checker))
 	{
 		vals->cmd[i] = argv[i + 2 + checker];
-		printf("");
 		i++;
 	}
 	vals->cmd[i] = NULL;

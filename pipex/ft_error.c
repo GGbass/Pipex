@@ -43,6 +43,8 @@ void	ft_error(char *message, int status, t_pipex *data, t_values *vals )
 	free(vals->doc); */
 	free(data->pipe_fd);
 	free(data->pre_pipe);
+	free(data);
+	free(vals);
 	exit(status);
 }
 
@@ -54,8 +56,10 @@ void ft_fd(t_pipex *data)
 	printf("data->pre_pipe[1] = %d\n", data->pre_pipe[1]);
 }
 
-void	ft_cleanup(t_pipex *data)
+void	ft_cleanup(t_pipex *data, t_values *vals)
 {
+	if (vals->check == 1)
+		unlink("temp_file");
 	free(data->pipe_fd);
 	free(data->pre_pipe);
 	exit(data->status);
