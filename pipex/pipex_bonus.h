@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:39:21 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/18 00:15:07 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/19 23:57:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_values
 {
 	char	**env;
 	char	**cmd;
-	char	**doc;
+	char	*limiter;
 	int		check;
 	int		fd_in;
 	int		fd_out;
@@ -60,5 +60,7 @@ void	ft_cleanup(t_pipex *pipex);
 void ft_fd(t_pipex *pipex);
 
 void	doc_child(t_pipex *data, t_values *vals);
+
+int	doc_fd(t_values *vals, char *limiter);
 
 #endif

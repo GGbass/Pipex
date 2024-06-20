@@ -18,7 +18,7 @@ void	ft_error2(char *message, int status)
 	exit(status);
 }
 
-void	ft_error(char *message, int status, t_pipex *data, t_values *vals)
+void	ft_error(char *message, int status, t_pipex *data, t_values *vals )
 {
 	int	i;
 
@@ -32,12 +32,15 @@ void	ft_error(char *message, int status, t_pipex *data, t_values *vals)
 			close(data->pre_pipe[i]);
 		i++;
 	}
-	while(vals->doc && vals->doc[i] != NULL && vals->check == 10)
+	if (vals->check == 1)
+		printf("ft_error\n");
+	
+	/* while(vals->doc && vals->doc[i] != NULL && vals->check == 10)
 	{
 		free(vals->doc[i]);
 		i++;
 	}
-	free(vals->doc);
+	free(vals->doc); */
 	free(data->pipe_fd);
 	free(data->pre_pipe);
 	exit(status);
@@ -53,23 +56,12 @@ void ft_fd(t_pipex *data)
 
 void	ft_cleanup(t_pipex *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < data->i)
-	{
-	if (data->pipe_fd[i] > 0)
-			close(data->pipe_fd[i]);
-		if (data->pre_pipe[i] > 0)
-			close(data->pre_pipe[i]);
-		i++;
-	}
 	free(data->pipe_fd);
 	free(data->pre_pipe);
 	exit(data->status);
 }
 
-void ft_doc_clean(char **doc)
+/* void ft_doc_clean(char **doc)
 {
 	int i;
 
@@ -81,4 +73,4 @@ void ft_doc_clean(char **doc)
 	}
 	free(doc);
 	return ;
-}
+} */

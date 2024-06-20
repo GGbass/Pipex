@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 20:17:31 by gongarci          #+#    #+#             */
-/*   Updated: 2024/06/17 23:45:51 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/20 19:02:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,51 +19,26 @@ int	checker(char *argv)
 	return (0);
 }
 
-char	**get_here_doc(char *limiter)
+int	doc_fd(t_values *vals, char *limiter)
 {
 	char	*line;
-	char	**doc;
+	int		temp_fd;
 
+	vals->limiter = limiter;
+	temp_fd = open("temp_file", O_CREAT | O_WRONLY, 0666);
+	if (temp_fd < 0)
+		ft_error2("Error creating temp file\n", 127);
 	line = get_next_line(0);
-	doc = ft_calloc(1, sizeof(char *) * (ft_strlen(line) + 1));
-	if (!doc || !line)
+	while(line)
 	{
-		free(line);
-		ft_error2("Error allocating memory\n", 127);
-	}
-	*doc = ft_strdup("");
-	while (line)
-	{
-		if ((ft_strlen(line) - 1) == ft_strlen(limiter))
-			if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		if ((ft_strlen(line) - 1) == ft_strlen(vals->limiter))
+			if (ft_strncmp(line, vals->limiter, ft_strlen(vals->limiter)) == 0)
 				break ;
-		*doc = ft_gnlstrjoin(*doc, line, sizeof(line));
+		ft_putstr_fd(line, temp_fd);
 		free(line);
 		line = get_next_line(0);
 	}
 	free(line);
-	doc[ft_len(doc)] = NULL;
-	return (doc);
-}
-
-void	doc_child(t_pipex *data, t_values *vals)
-{
-	int i;
-
-	i = 0;
-	{
-		close(data->pipe_fd[READ]);
-		dup2(data->pipe_fd[WRITE], STDOUT_FILENO);
-		close(data->pipe_fd[WRITE]);
-		close(vals->fd_out);
-		while (vals->doc[i] != NULL)
-		{
-			ft_printf ("%s", vals->doc[i]);
-			i++;
-		}
-		while (vals->doc && i >= 0)
-			free(vals->doc[i--]);
-		free(vals->doc);
-		exit(0);
-	}
+	close(temp_fd);
+	return (temp_fd);
 }

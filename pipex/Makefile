@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 20:20:21 by gongarci          #+#    #+#              #
-#    Updated: 2024/06/18 00:05:23 by marvin           ###   ########.fr        #
+#    Updated: 2024/06/20 00:12:12 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,10 @@ SRCB =	ft_pipex_bonus.c \
 OBJ = $(SRC:.c=.o)
 OBJB = $(SRCB:.c=.o)
 
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address,leak
+CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address,leak
 #valgrind --track-fds=yes
 #-g3 -fsanitize=address,leak
+# valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --trace-children=yes -s -q 
 CC = gcc
 
 all: $(NAME)
