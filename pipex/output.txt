@@ -1,3 +1,0 @@
-#    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
-#    Created: 2024/03/27 19:27:07 by gongarci          #+#    #+#              #
-#    Updated: 2024/06/20 19:22:39 by gongarci         ###   ########.fr        #

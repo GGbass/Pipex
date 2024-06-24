@@ -41,6 +41,7 @@ void	ft_error(char *message, int status, t_pipex *data, t_values *vals )
 
 void	ft_fd(t_pipex *data)
 {
+	printf("iteracion n:%d\n", data->i);
 	printf("data->pipe_fd[0] = %d\n", data->pipe_fd[0]);
 	printf("data->pipe_fd[1] = %d\n", data->pipe_fd[1]);
 	printf("data->pre_pipe[0] = %d\n", data->pre_pipe[0]);
@@ -51,6 +52,12 @@ void	ft_cleanup(t_pipex *data, t_values *vals)
 {
 	if (vals->check == 1)
 		unlink("temp_file");
+	close(data->pipe_fd[0]);
+	close(data->pipe_fd[1]);
+	close(data->pre_pipe[0]);
+	close(data->pre_pipe[1]);
+	close(vals->fd_in);
+	close(vals->fd_out);
 	free(data->pipe_fd);
 	free(data->pre_pipe);
 	//exit(data->status);
