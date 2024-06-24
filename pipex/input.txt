@@ -1,0 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    input.txt                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gongarci <gongarci@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/03/27 19:27:07 by gongarci          #+#    #+#              #
+#    Updated: 2024/06/20 19:22:39 by gongarci         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+mesaje de error  cuando el argumento es un espacio " " no es correcto
+
+cuando grep es el primer comando en here_doc 
+
+fd abiertos
+
+leaks
